@@ -1,0 +1,52 @@
+<!-- hero-details.component.html : Vue de la fiche hero -->
+<div class="col-md-4"></div>
+<!-- Si la variable hero est définie on peut afficher la div représentant la fiche -->
+<div class="col-md-4" *ngIf="hero">
+  <h2>Détails héro - {{ hero.name }} <span class="badge" style="font-size: 1.2em;">{{ hero.id }}</span></h2>
+
+  <label>Nom :</label>
+  <div class="form-group">
+    <input class="form-control" type="text" [(ngModel)]="hero.name" placeholder="Nom du hero"/>
+    <!--     [(ngModel)] : Permet de lier un attribut de l'objet hero à cet input -->
+  </div>
+
+  <div style="margin-top: 50px; margin-bottom: 50px;">
+    <fieldset>
+      <legend>Caractéristiques :</legend>
+      Points de caracéristiques restants : <span class="badge" style="font-size: 1.1em;">{{ ptsCaractRestant }}</span>
+
+      <br />
+      <br />
+
+      <div class="col-md-6">
+        Points de vie : <span><input #hero_pv id="hero-pv" [(ngModel)]="hero.pv" type="number" min="0" max = "40"
+          (input)="validateCaract()" /></span>
+      </div>
+      <div class="col-md-6">
+        Attaque :<span><input #hero_attaque id="hero-attaque" [(ngModel)]="hero.attaque" type="number" min="0" max = "40"
+          (input)="validateCaract()" /></span>
+      </div>
+      <div class="col-md-6">
+        Degats par secondes : <span><input #hero_degat id="hero-degat" [(ngModel)]="hero.degat" type="number" min="0" max = "40"
+          (input)="validateCaract()" /></span>
+      </div>
+      <div class="col-md-6" style="margin-bottom: 20px;">
+        Esquive :<span><input #hero_esquive id="hero-esquive" [(ngModel)]="hero.esquive" type="number" min="0" max = "40"
+          (input)="validateCaract()" /></span>
+      </div>
+
+      <select class="form-control" [(ngModel)]="hero.idWeapon">
+        <!-- <option ng-value="0">Sélectionner une arme...</option> -->
+        <option *ngFor="let weapon of allWeapons" [value]="weapon.id">{{ weapon.name }}</option>
+      </select>
+
+    </fieldset>
+  </div>
+
+  <button class="btn btn-default col-md-2" (click)="goBack()">RETOUR</button>
+  <div class="col-md-8"></div>
+  <button class="btn btn-primary col-md-2" (click)="save()" [disabled]="(hero.pv < 1 || hero.degat < 1 || hero.attaque < 1 || hero.esquive < 1) || (hero.pv+hero.degat+hero.attaque+hero.esquive > 40)">
+    SAUVER
+  </button>
+</div>
+<div class="col-md-4"></div>

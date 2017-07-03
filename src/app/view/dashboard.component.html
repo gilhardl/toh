@@ -1,0 +1,24 @@
+<!-- dashboard.component.html : Vue du dashboard -->
+<div class="col-md-1"></div>
+<div class="col-md-4">
+  <h2 class="text-center">Meilleurs heros</h2>
+  <!-- Affichage des Top Heros -->
+  <ul class="list-group">
+    <li class="list-group-item text-center" *ngFor="let hero of topHeroes"><a [routerLink]="['/details', hero.id]">{{ hero.name }}</a></li>
+    <!--                  * : Définit un template (le même élément (<a ...></a>) sera répété n fois) -->
+    <!--              ngFor : Directive permettant de définir une boucle -->
+    <!-- "let hero of topHeroes" : Définit la boucle - Traduire par "prend chaque hero dans le tableau topHeroes (fournit par le controleur),
+    met le dans une variable locale hero et rend cette variable disponible dans le template -->
+    <!--       [routerLink] : Directive du RouterModule pour indentifier la route cible du lien
+    Les [] sont là car on passe deux paramètres à la directive : la route cible ('details') et un paramètre pour la route (hero.id) -->
+  </ul>
+</div>
+<div class="col-md-2"></div>
+<div class="col-md-4">
+  <h2 class="text-center">Meilleures armes</h2>
+  <!-- Affichage des Top Armes -->
+  <ul class="list-group">
+    <li class="list-group-item text-center" *ngFor="let weapon of topWeapons"><a [routerLink]="['/weapon', weapon.id]">{{ weapon.name }}</a></li>
+  </ul>
+</div>
+<div class="col-md-1"></div>

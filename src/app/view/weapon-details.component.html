@@ -1,0 +1,47 @@
+<!-- weapon-details.component.html : Vue de la fiche arme -->
+<div class="col-md-4"></div>
+<div class="col-md-4" *ngIf="weapon">
+  <h2>Détails arme - {{ weapon.name }} <span class="badge" style="font-size: 1.2em;">{{ weapon.id }}</span></h2>
+
+  <label>Nom :</label>
+  <div class="form-group">
+    <input class="form-control" type="text" [(ngModel)]="weapon.name" placeholder="Nom de l'arme"/>
+  </div>
+
+
+
+
+  <div style="margin-top: 50px; margin-bottom: 50px;">
+
+    <fieldset>
+      <legend>Caractéristiques :</legend>
+
+      <div class="col-md-6">
+        Points de vie : <span><input #weapon_pv id="weapon-pv" [(ngModel)]="weapon.pv" type="number" min="-5" max = "5"
+          (input)="validateCaract()" /></span>
+      </div>
+
+      <div class="col-md-6">
+        Attaque :<span><input #weapon_attaque id="weapon-attaque" [(ngModel)]="weapon.attaque" type="number" min="-5" max = "5"
+          (input)="validateCaract()" /></span>
+      </div>
+
+      <div class="col-md-6">
+        Degats par secondes : <span><input #weapon_degat id="weapon-degat" [(ngModel)]="weapon.degat" type="number" min="-5" max = "5"
+          (input)="validateCaract()" /></span>
+      </div>
+
+      <div class="col-md-6">
+        Esquive :<span><input #weapon_esquive id="weapon-esquive" [(ngModel)]="weapon.esquive" type="number" min="-5" max = "5"
+          (input)="validateCaract()" /></span>
+      </div>
+    </fieldset>
+  </div>
+
+  <button class="btn btn-default col-md-2" (click)="goBack()">RETOUR</button>
+  <div class="col-md-8"></div>
+  <button class="btn btn-primary col-md-2" (click)="save()" [disabled]="!caractOK">
+    SAUVER
+  </button>
+</div>
+<div class="col-md-4"></div>

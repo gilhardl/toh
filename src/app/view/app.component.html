@@ -1,0 +1,28 @@
+<!-- app.component.html : Vue du composant de base de l'application -->
+<!--                        Définis le modèle de page de l'app      -->
+<h1 class="text-center">{{ pageTitle }}</h1>
+
+<!-- Définition du menu -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/dashboard" routerLinkActive="active">Tableau de bord</a></li>
+        <li><a routerLink="/heroes" routerLinkActive="active">Heros</a></li>
+        <li><a routerLink="/weapons" routerLinkActive="active">Armes</a></li>
+      </ul>
+      <hero-search></hero-search>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<!-- Conteneur pour les pages  -->
+<!--       - Le RouterModule redirige les requetes d'url sur les différentes pages, voici où il les affiche -->
+<router-outlet></router-outlet>

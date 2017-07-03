@@ -1,0 +1,57 @@
+<!-- heroes.component.html : Vue de la liste des hero -->
+<!-- Formulaire de création d'un hero -->
+<div class="col-md-4"></div>
+<div class="row">
+  <div class="col-md-4">
+    <label>Ajouter un nouveau héro :</label>
+    <div class="input-group">
+      <input #heroName type="text" class="form-control" placeholder="Nom du hero">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="add(heroName.value); heroName.value='';">Ajouter</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="col-md-4"></div>
+<br />
+<br />
+
+<h2 class="text-center">Tous les héros</h2>
+
+
+<div class="col-md-4">
+  <!-- Apercu du hero sélectionné (n'est affiché que si l'objet selectedHero est défini -->
+  <div class="panel panel-info" *ngIf="selectedHero"  style="margin-top: 80px;">
+    <div class="panel-heading">
+      {{selectedHero.name | uppercase}}
+      <!--            | uppercase : pipe permettant de mettre le texte en MAJUSCULE, le nom du hero en l'occurence -->
+    </div>
+    <div class="panel-body">
+      <button class="btn btn-primary" (click)="gotoDetails()">Voir la fiche</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+
+  Trier par (ordre croissant):
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" (click)="sortHeroes('id')">ID</button>
+    <button type="button" class="btn btn-default" (click)="sortHeroes('pv')">PV</button>
+    <button type="button" class="btn btn-default" (click)="sortHeroes('degat')">Degat</button>
+    <button type="button" class="btn btn-default" (click)="sortHeroes('attaque')">Attaque</button>
+    <button type="button" class="btn btn-default" (click)="sortHeroes('esquive')">Esquive</button>
+  </div>
+
+  <!-- Liste de hero -->
+  <ul class="list-group heroes" style="margin-top: 40px;">
+    <li class="list-group-item" *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
+      <!-- [class.selected]="hero === selectedHero" : Permet de dire "Met la classe selected au li courant, si le hero courant est le hero sélectionné (hero === selectedHero) -->
+      <button type="button" class="btn btn-default" aria-label="Supprimer" (click)="delete(hero); $event.stopPropagation()" style="margin-right: 50px;">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+      <span>{{ hero.name }}</span>
+      <span class="badge">{{ hero.id }}</span>
+    </li>
+  </ul>
+</div>
+<div class="col-md-4"></div>

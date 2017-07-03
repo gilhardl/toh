@@ -1,0 +1,56 @@
+<!-- weapons.component.html : Vue de la liste des armes -->
+<!-- Formulaire de création d'une arme -->
+<div class="col-md-4"></div>
+<div class="row">
+  <div class="col-md-4">
+    <label>Ajouter une nouvelle arme :</label>
+    <div class="input-group">
+      <input #weaponName type="text" class="form-control" placeholder="Nom de l'arme">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="add(weaponName.value); weaponName.value='';">Ajouter</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="col-md-4"></div>
+<br />
+<br />
+
+<h2 class="text-center">Toutes les armes</h2>
+
+
+<div class="col-md-4">
+  <!-- Apercu de l'arme sélectionné (n'est affiché que si l'objet selectedHero est défini -->
+  <div class="panel panel-info" *ngIf="selectedWeapon"  style="margin-top: 80px;">
+    <div class="panel-heading">
+      {{selectedWeapon.name | uppercase}}
+      <!--            | uppercase : pipe permettant de mettre le texte en MAJUSCULE, le nom du hero en l'occurence -->
+    </div>
+    <div class="panel-body">
+      <button class="btn btn-primary" (click)="gotoDetails()">Voir la fiche</button>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+
+  Trier par (ordre croissant):
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" (click)="sortWeapons('id')">ID</button>
+    <button type="button" class="btn btn-default" (click)="sortWeapons('pv')">PV</button>
+    <button type="button" class="btn btn-default" (click)="sortWeapons('degat')">Degat</button>
+    <button type="button" class="btn btn-default" (click)="sortWeapons('attaque')">Attaque</button>
+    <button type="button" class="btn btn-default" (click)="sortWeapons('esquive')">Esquive</button>
+  </div>
+
+  <!-- Liste des armes -->
+  <ul class="list-group weapons" style="margin-top: 40px;">
+    <li class="list-group-item" *ngFor="let weapon of weapons" [class.selected]="weapon === selectedHero" (click)="onSelect(weapon)">
+      <button type="button" class="btn btn-default" aria-label="Supprimer" (click)="delete(weapon); $event.stopPropagation()" style="margin-right: 50px;">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      </button>
+      <span>{{ weapon.name }}</span>
+      <span class="badge">{{ weapon.id }}</span>
+    </li>
+  </ul>
+</div>
+<div class="col-md-4"></div>

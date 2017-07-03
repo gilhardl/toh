@@ -1,0 +1,14 @@
+<div id="search-component">
+  <form class="navbar-form navbar-right">
+    <div class="form-group" style="position: relative;">
+      <input #searchBox id="search-box" (keyup)="search(searchBox.value)" type="text" class="form-control" placeholder="Rechercher un hero..." style="width: 200px;"/>
+      <div style="position: absolute; background-color: white; width: 200px; border: 1px solid black;" ng-if="heroes">
+        <div *ngFor="let hero of heroes | async" (click)="gotoDetail(hero)" class="search-result" style="cursor: pointer;">
+          <!--  *ngFor="let hero of heroes | async" : Voir dashboard.component.html pour plus d'infos -->
+          <!--                                async : Permet de faire le raffraichissement en asynchrone -->
+          {{ hero.name }}
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
